@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Crazy Minecraft Sphere</title>
+<script type="text/javascript">
+   
+   function showlayer(){
+	    var z=document.getElementById("whichlayer").value;
+	    
+	     
+   		var c=document.getElementById("layerCanvas");
+   		var ctx=c.getContext("2d");
+   		ctx.strokeStyle="#333333";
+        ctx.fillRect(50,50,10,10);
+        var maxrad = Math.sqrt(4900 - z*z);
+        
+   		for (var i = -1 * Math.round(maxrad); i <= Math.round(maxrad); i++)
+            {
+	           if (maxrad * maxrad - i * i > 0){
+               		local = Math.round(Math.sqrt(maxrad * maxrad - i * i));
+                    ctx.fillRect( (local + 70)*5 , (i+70)*5 , 5, 5);
+                }
+   			}
+   		};
+   		
+
+</script>
+</head>
+<body>
+
+<canvas id="layerCanvas" width="705" height="705"></canvas>
+
+Layer:<input id="whichlayer"/><button id="submit" onclick="showlayer()">Get Layer</button>
+
+
+
+<script type="text/javascript">
+   
+
+</script>
+</body>
+
+</html>
