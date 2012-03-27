@@ -10,27 +10,100 @@
    		var c=document.getElementById("layerCanvas");
    		var ctx=c.getContext("2d");
    		ctx.strokeStyle="#333333";
-        ctx.fillRect(50,50,10,10);
+        ctx.fillStyle="#999999";
+        ctx.clearRect(0,0,705,705);
         var maxrad = Math.sqrt(4900 - z*z);
         
    		for (var i = -1 * Math.round(maxrad); i <= Math.round(maxrad); i++)
             {
 	           if (maxrad * maxrad - i * i > 0){
                		local = Math.round(Math.sqrt(maxrad * maxrad - i * i));
+                    if (i == -Math.round(maxrad) || i == Math.round(maxrad)){
+	                    for (var p = -local; p <= local; p++){
+	                    ctx.fillRect((p+70) * 5, (i + 70) * 5, 5, 5)
+						ctx.strokeRect((p+70) * 5, (i + 70) * 5, 5, 5)
+                    }
+	                }
+                    if (i < 0){
+	                     
+	                     nextlocal = Math.round(Math.sqrt(maxrad * maxrad - (i + 1) * (i + 1)))
+	                     for (var m = local; m<=nextlocal; m++){
+		                       ctx.fillRect((m+70)*5, (i + 70) * 5, 5, 5);
+								ctx.strokeRect((m+70)*5, (i + 70) * 5, 5, 5);
+		                 }
+		                 for (var n = -nextlocal; n <= -local; n++){
+			                 ctx.fillRect((n+70)*5, (i + 70) * 5, 5, 5);
+							ctx.strokeRect((n+70)*5, (i + 70) * 5, 5, 5);
+						  }
+		             }
+		              
+		             if (i > 0){
+			             prevlocal = Math.round(Math.sqrt(maxrad * maxrad - (i-1)*(i-1)))
+			             for (var m = local; m <= prevlocal; m++){
+				                ctx.fillRect((m+70)*5, (i+70) * 5, 5, 5);
+								ctx.strokeRect((m+70)*5, (i+70) * 5, 5, 5);
+					          }
+					      for (var n = -prevlocal; n <= -local; n++){
+						        ctx.fillRect((n+70)*5, (i+70) * 5, 5, 5);
+								ctx.strokeRect((n+70)*5, (i+70) * 5, 5, 5);
+						       }}
+	                ctx.fillRect( (-local + 70) * 5, (i + 70) * 5, 5, 5);
+					ctx.strokeRect( (-local + 70) * 5, (i + 70) * 5, 5, 5);
                     ctx.fillRect( (local + 70)*5 , (i+70)*5 , 5, 5); 
-
+					ctx.strokeRect( (local + 70)*5 , (i+70)*5 , 5, 5); 
+                
                 }
+
    			}
+            ctx.strokeStyle="#FF0000";
+            var maxrad = Math.sqrt(4900 - (z-1)*(z-1));
+
+	   		for (var i = -1 * Math.round(maxrad); i <= Math.round(maxrad); i++)
+	            {
+		           if (maxrad * maxrad - i * i > 0){
+	               		local = Math.round(Math.sqrt(maxrad * maxrad - i * i));
+	                    if (i == -Math.round(maxrad) || i == Math.round(maxrad)){
+		                    for (var p = -local; p <= local; p++){
+		                    ctx.strokeRect((p+70) * 5, (i + 70) * 5, 5, 5)
+	                    }
+		                }
+	                    if (i < 0){
+
+		                     nextlocal = Math.round(Math.sqrt(maxrad * maxrad - (i + 1) * (i + 1)))
+		                     for (var m = local; m<=nextlocal; m++){
+			                       ctx.strokeRect((m+70)*5, (i + 70) * 5, 5, 5);
+			                 }
+			                 for (var n = -nextlocal; n <= -local; n++){
+				                 ctx.strokeRect((n+70)*5, (i + 70) * 5, 5, 5);
+							  }
+			             }
+
+			             if (i > 0){
+				             prevlocal = Math.round(Math.sqrt(maxrad * maxrad - (i-1)*(i-1)))
+				             for (var m = local; m <= prevlocal; m++){
+					                ctx.strokeRect((m+70)*5, (i+70) * 5, 5, 5);
+						          }
+						      for (var n = -prevlocal; n <= -local; n++){
+							        ctx.strokeRect((n+70)*5, (i+70) * 5, 5, 5);
+							       }}
+		                ctx.strokeRect( (-local + 70) * 5, (i + 70) * 5, 5, 5);
+	                    ctx.strokeRect( (local + 70)*5 , (i+70)*5 , 5, 5); 
+
+	                }
+
+	   			}
    		};
    		
 
 </script>
 </head>
 <body>
-
+	<h2>The Crazy Minecraft Sphere</h2>
+	<p>Red boxes are one level down and are shown for reference. A red box around a grey fill means a box on this layer is on top of one from the layer below.  Enter a layer between -69 and 69 and press the button.</p>
+Layer:<input id="whichlayer"/><button id="submit" onclick="showlayer()">Get Layer</button>
 <canvas id="layerCanvas" width="705" height="705"></canvas>
 
-Layer:<input id="whichlayer"/><button id="submit" onclick="showlayer()">Get Layer</button>
+
 
 
 
